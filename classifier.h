@@ -28,11 +28,11 @@ public:
 
   	string predict(vector<double>);
 private:
-    void get_features(vector<double> raw, vector<double> features);
+    void get_features(const vector<double> &raw, vector<double> &features);
 
     map<string, vector<double>> means;
-    map<string, vector<double>> stds;
-    map<string, double> p_labels;
+    map<string, vector<double>> stderrs;
+    map<string, double> num_labels;
 
 };
 

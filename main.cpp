@@ -57,18 +57,16 @@ int main() {
     cout << "Y_test number of elements " << Y_test.size() << endl;
     
     int score = 0;
-    for(int i = 0; i < X_test.size(); i++)
-    {
+    for(int i = 0; i < X_test.size(); i++) {
         vector<double> coords = X_test[i];
         string predicted = gnb.predict(coords);
-        if(predicted.compare(Y_test[i]) == 0)
-        {
+        if(predicted.compare(Y_test[i]) == 0) {
             score += 1;
         }
     }
 
     float fraction_correct = float(score) / Y_test.size();
-    cout << "You got " << (100*fraction_correct) << " correct" << endl;
+    cout << "You got " << (100*fraction_correct) << " percent correct" << endl;
 
     return 0;
 }

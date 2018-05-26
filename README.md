@@ -8,7 +8,9 @@ cd build
 cmake ..
 make
 ./naive-bayes
-
+```
+Result:
+```
 X_train number of elements 750
 X_train element size 4
 Y_train number of elements 750

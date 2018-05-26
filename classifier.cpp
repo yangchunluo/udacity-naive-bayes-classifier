@@ -3,6 +3,7 @@
 #include <fstream>
 #include <math.h>
 #include <vector>
+#include <cassert>
 #include "classifier.h"
 
 /**
@@ -14,10 +15,16 @@ GNB::GNB() {
 
 GNB::~GNB() {}
 
-void GNB::get_features(vector<double> raw, vector<double> features)
+const int lane_width = 4;
+
+void GNB::get_features(const vector<double> raw, vector<double> features)
 {
     // feature engineering.
-    
+    assert(raw.size() == 4);
+    double s = raw[0], d = raw[1], s_dot = raw[2], d_dot = raw[3];
+    features.push_back(fmod(d, lane_width));
+    features.push_back(s_dot); 
+    features.push_back(d_dot);
 }
 
 void GNB::train(vector<vector<double>> data, vector<string> labels)
@@ -39,6 +46,19 @@ void GNB::train(vector<vector<double>> data, vector<string> labels)
 		labels - array of N labels
 		  - Each label is one of "left", "keep", or "right".
 	*/
+    assert(data.size() == labels.size());
+    for (int i = 0; i < data.size(); i ++) {
+        vector<double> features;
+        get_features(data[i], features);
+
+        string label = labels[i];
+       /* 
+        if (p_labels.find(label) == p_labels.cend()) {
+            p_labels[label] = 0;
+        } else {
+            p_labels[label] ++;
+        }*/
+    }
 }
 
 string GNB::predict(vector<double> sample)
